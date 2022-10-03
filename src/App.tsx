@@ -101,8 +101,11 @@ const App:React.FC = () => {
   }
 
   return <div style={{display: 'inline-flex', flexDirection: 'row', justifyContent: 'center'}}>
-              <div style={{border: '1px solid black', width:'500px'}}>
-                으악
+              <div style={{border: '1px solid black', width:'350px'}}>
+                조작법.<br></br>
+                1.마우스휠로 확대 축소 가능<br></br>
+                2.왼쪽클릭으로 드래그하면 그리기 가능<br></br>
+                3.오른쪽클릭으로 드래그하면 지우기 가능<br></br>
               </div>
               <div onWheel={onWheel} style={{border: '1px solid black', width:'1200px', display: 'inline-flex', justifyContent:'center', alignItems:'center'}} onContextMenu={(e)=>e.preventDefault()} >
                 <Sketch setup={setup} draw={draw} mouseDragged={mouseDragged} mousePressed={mouseDragged} mouseWheel={mouseWheel} />
