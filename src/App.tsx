@@ -1,0 +1,99 @@
+import React, { WheelEventHandler } from 'react'
+import Sketch from 'react-p5'
+import p5Types from 'p5'
+
+const App:React.FC = () => {
+
+  let pg:p5Types;
+  let scale:number = 12;
+  let wheelDir:number;
+
+  const SetGrid = (pixelRenderer:p5Types, gridRenderer:p5Types, gridCount:number) => {
+    let i:number = 0, j:number = 0;
+    gridRenderer.strokeWeight(0.7);
+
+    
+    for(j = 0; j < pixelRenderer.width/gridCount; j++) {
+      gridRenderer.stroke(0, 40)
+      for(i = 1;i < gridCount; i++) {
+        gridRenderer.line(0.5 + (i + j * gridCount) * scale, 0.5, 0.5 + (i + j * gridCount) * scale, 0.5 + pixelRenderer.height * scale);
+      }
+      gridRenderer.stroke(0, 255)
+      gridRenderer.line(0.5 + (gridCount + j * gridCount) * scale, 0.5, 0.5 + (gridCount + j * gridCount) * scale, 0.5 + pixelRenderer.height * scale);
+    }
+
+    
+    for(j = 0; j < pixelRenderer.height/gridCount; j++) {
+      gridRenderer.stroke(0, 40)
+      for(i = 1;i < gridCount; i++) {
+        gridRenderer.line(0.5, 0.5 + (i + j * gridCount) * scale, 0.5 + pixelRenderer.width * scale, 0.5 + (i + j * gridCount) * scale);
+      }
+      gridRenderer.stroke(0, 255)
+      gridRenderer.line(0.5, 0.5 + (gridCount + j * gridCount) * scale, 0.5 + pixelRenderer.width * scale, 0.5 + (gridCount + j * gridCount) * scale);
+    }
+    
+    gridRenderer.fill(0,0,0,0)
+    gridRenderer.rect(0.5, 0.5, pixelRenderer.width * scale, pixelRenderer.height * scale)
+  }
+
+  const setup = (p5:p5Types, canvasParentRef: Element) => {
+    p5.createCanvas(1024, 512).parent(canvasParentRef)
+    pg = p5.createGraphics(128, 128)
+    p5.background(0, 155, 55)
+    pg.noSmooth()
+    p5.noSmooth()
+    pg.strokeWeight(1)
+    pg.stroke(100, 255)
+  }
+  
+  const draw = (p5:p5Types) => {
+    pg.rectMode('corners');
+    p5.background(255, 255, 255);
+    pg.fill(p5.random(0, 255), p5.random(0, 255), p5.random(0, 255), 40);
+    pg.rect(0.5, 0.5, 4.5, 4.5)
+
+    p5.image(pg as unknown as p5Types.Image, 0.5, 0.5, pg.width * scale, pg.height * scale)
+    SetGrid(pg, p5, 8)
+  }
+  
+  const mouseDragged = (p5:p5Types) => {
+    pg.loadPixels()
+    switch(p5.mouseButton){
+      case 'right':
+        pg.set(p5.int(pg.width * p5.mouseX / pg.width / scale), p5.int(pg.height * p5.mouseY / pg.height / scale), 255)
+        break
+      case 'left':
+        pg.set(p5.int(pg.width * p5.mouseX / pg.width / scale), p5.int(pg.height * p5.mouseY / pg.height / scale), 0)
+        break
+    }
+    pg.updatePixels()
+  }
+
+
+  const mouseWheel = (p5:any) => {
+    if(wheelDir > 0) {
+      if(scale <= 30)
+        scale++
+    }
+    else if(scale > 1) {
+      scale--
+    }
+  }
+
+  const onWheel = (e:React.WheelEvent<HTMLDivElement>) => {
+    wheelDir = e.deltaY;
+  }
+
+  return <div style={{display: 'inline-flex', flexDirection: 'row', justifyContent: 'center'}}>
+              <div style={{border: '1px solid black', width:'500px'}}>
+                으악
+              </div>
+              <div onWheel={onWheel} style={{border: '1px solid black', width:'1200px', display: 'inline-flex', justifyContent:'center', alignItems:'center'}} onContextMenu={(e)=>e.preventDefault()} >
+                <Sketch setup={setup} draw={draw} mouseDragged={mouseDragged} mousePressed={mouseDragged} mouseWheel={mouseWheel} />
+              </div>
+              <div>
+              </div>
+          </div>
+}
+
+export default App
