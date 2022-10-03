@@ -57,13 +57,29 @@ const App:React.FC = () => {
   }
   
   const mouseDragged = (p5:p5Types) => {
+    let mx:number, my:number;
+
+    if(p5.mouseX < 0)
+      return
+    else if(p5.mouseX > p5.width)
+      return
+    else
+      mx = p5.mouseX;
+
+    if(p5.mouseY < 0)
+      return
+    else if(p5.mouseY > p5.height)
+      return
+    else
+      my = p5.mouseY;
+
     pg.loadPixels()
     switch(p5.mouseButton){
       case 'right':
-        pg.set(p5.int(pg.width * p5.mouseX / pg.width / scale), p5.int(pg.height * p5.mouseY / pg.height / scale), 255)
+        pg.set(p5.int(mx / scale), p5.int(my / scale), 255)
         break
       case 'left':
-        pg.set(p5.int(pg.width * p5.mouseX / pg.width / scale), p5.int(pg.height * p5.mouseY / pg.height / scale), 0)
+        pg.set(p5.int(mx / scale), p5.int(my / scale), 0)
         break
     }
     pg.updatePixels()
