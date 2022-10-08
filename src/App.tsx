@@ -88,16 +88,15 @@ const s = (sketch:p5) => {
   sketch.mousePressed = sketch.mouseDragged
 }
 
-let p5render:p5 | undefined;
 
-const App:React.FC = () => {
- 
+let p5Instance:p5;
+
+const App:React.FC = () => { 
   
-
   useEffect(() => {
-    p5render = new p5(s, document.getElementById('p5Render') as HTMLElement) 
+    p5Instance = new p5(s, document.getElementById('p5Render') as HTMLElement)
     return () => {
-      p5render = undefined
+      p5Instance = null
     }
   }, []);
 
