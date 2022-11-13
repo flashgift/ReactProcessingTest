@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/ReactProcessingTest/static/css/main.e6c13ad2.css",
-    "main.js": "/ReactProcessingTest/static/js/main.582aad16.js",
+    "main.css": "/ReactProcessingTest/static/css/main.4010d788.css",
+    "main.js": "/ReactProcessingTest/static/js/main.3420e81b.js",
     "static/js/787.e7293012.chunk.js": "/ReactProcessingTest/static/js/787.e7293012.chunk.js",
     "index.html": "/ReactProcessingTest/index.html",
-    "main.e6c13ad2.css.map": "/ReactProcessingTest/static/css/main.e6c13ad2.css.map",
-    "main.582aad16.js.map": "/ReactProcessingTest/static/js/main.582aad16.js.map",
+    "static/media/triangle.svg": "/ReactProcessingTest/static/media/triangle.ca52847d4301e9c3182ebc86ff595c5a.svg",
+    "main.4010d788.css.map": "/ReactProcessingTest/static/css/main.4010d788.css.map",
+    "main.3420e81b.js.map": "/ReactProcessingTest/static/js/main.3420e81b.js.map",
     "787.e7293012.chunk.js.map": "/ReactProcessingTest/static/js/787.e7293012.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e6c13ad2.css",
-    "static/js/main.582aad16.js"
+    "static/css/main.4010d788.css",
+    "static/js/main.3420e81b.js"
   ]
 }
